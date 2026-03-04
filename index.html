@@ -1,0 +1,1086 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Happy Birthday Faiqa</title>
+  <meta name="description" content="Pull the ribbon for a birthday surprise." />
+  <style>
+    :root{
+      --bg1:#0b1020;
+      --bg2:#2a0b3b;
+      --card: rgba(255,255,255,0.10);
+      --card2: rgba(255,255,255,0.16);
+      --text: rgba(255,255,255,0.92);
+      --muted: rgba(255,255,255,0.70);
+      --shadow: 0 20px 60px rgba(0,0,0,0.45);
+      --pull: 0px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      overflow:hidden;
+      background: radial-gradient(1100px 700px at 20% 20%, rgba(255,106,213,0.28), transparent 60%),
+                  radial-gradient(900px 600px at 80% 25%, rgba(96,231,255,0.20), transparent 55%),
+                  radial-gradient(800px 560px at 55% 85%, rgba(255,214,84,0.14), transparent 55%),
+                  linear-gradient(135deg, var(--bg1), var(--bg2));
+    }
+
+    /* soft grain */
+    .grain{
+      position:fixed; inset:0;
+      pointer-events:none;
+      opacity:0.10;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E");
+      mix-blend-mode: overlay;
+    }
+
+    .wrap{
+      height:100%;
+      display:grid;
+      place-items:center;
+      padding:24px;
+    }
+
+    .panel{
+      width:min(980px, 95vw);
+      border-radius:28px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06));
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255,255,255,0.16);
+      backdrop-filter: blur(10px);
+      overflow:hidden;
+      position:relative;
+    }
+
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:18px 18px 0 18px;
+      gap:12px;
+    }
+    .badge{
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      padding:10px 14px;
+      border-radius:999px;
+      background: rgba(0,0,0,0.18);
+      border: 1px solid rgba(255,255,255,0.14);
+      color: var(--muted);
+      font-size:14px;
+      user-select:none;
+    }
+    .musicBtn{
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 14px;
+      border-radius:999px;
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.16);
+      color: var(--text);
+      font-size:14px;
+      user-select:none;
+      transition: transform .15s ease, background .2s ease;
+    }
+    .musicBtn:active{transform: scale(0.98)}
+    .musicBtn:hover{background: rgba(255,255,255,0.14)}
+    .dot{
+      width:9px; height:9px; border-radius:50%;
+      background: rgba(255,255,255,0.6);
+      box-shadow: 0 0 0 6px rgba(255,255,255,0.10);
+    }
+    .dot.on{background: rgba(106,255,176,0.95)}
+    .dot.off{background: rgba(255,106,106,0.95)}
+
+    /* Start scene */
+    .stage{
+      position:relative;
+      min-height: 560px;
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 10px;
+      padding: 18px;
+    }
+    @media (max-width: 820px){
+      .stage{grid-template-columns:1fr; min-height: 640px;}
+    }
+
+    .hero{
+      padding: 18px 18px 12px 18px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      gap: 14px;
+    }
+    .h1{
+      font-size: clamp(30px, 4.3vw, 54px);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin:0;
+    }
+    .sub{
+      color: var(--muted);
+      font-size: 16px;
+      line-height:1.6;
+      margin:0;
+      max-width: 54ch;
+    }
+    .hint{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      color: rgba(255,255,255,0.78);
+      font-size:14px;
+      user-select:none;
+      margin-top: 10px;
+    }
+    .hint span{
+      padding:7px 10px;
+      background: rgba(0,0,0,0.18);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius:999px;
+    }
+
+    .ribbonZone{
+      display:grid;
+      place-items:center;
+      position:relative;
+      padding: 18px;
+    }
+
+    .ribbonCard{
+      width: min(320px, 88vw);
+      height: 420px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.10), rgba(255,255,255,0.06));
+      border: 1px solid rgba(255,255,255,0.14);
+      box-shadow: 0 10px 35px rgba(0,0,0,0.35);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .sparkles{
+      position:absolute; inset:-80px;
+      background:
+        radial-gradient(circle at 30% 20%, rgba(255,255,255,0.20), transparent 40%),
+        radial-gradient(circle at 70% 35%, rgba(255,255,255,0.12), transparent 42%),
+        radial-gradient(circle at 45% 75%, rgba(255,255,255,0.10), transparent 44%);
+      filter: blur(0px);
+      animation: floaty 5.5s ease-in-out infinite;
+    }
+    @keyframes floaty{
+      0%,100%{transform: translateY(0px)}
+      50%{transform: translateY(12px)}
+    }
+
+    .ribbon{
+      --w: 96px;
+      position:absolute;
+      left:50%;
+      top: -40px;
+      transform: translateX(-50%);
+      width: var(--w);
+      height: calc(300px + var(--pull));
+      border-radius: 18px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.05)),
+        linear-gradient(90deg, rgba(0,0,0,0.18), transparent 25%, rgba(255,255,255,0.22) 45%, transparent 65%, rgba(0,0,0,0.18)),
+        linear-gradient(135deg, rgba(255,94,205,0.95), rgba(255,69,145,0.85));
+      background-blend-mode: overlay, soft-light, normal;
+      box-shadow: 0 20px 70px rgba(255, 91, 182, 0.25);
+      border: 1px solid rgba(255,255,255,0.24);
+      transition: height .06s linear;
+    }
+
+    .ribbon::before{
+      content:"";
+      position:absolute; inset: 0;
+      opacity: 0.25;
+      background-image: repeating-linear-gradient(135deg, rgba(255,255,255,0.35) 0 6px, transparent 6px 12px);
+      mix-blend-mode: overlay;
+    }
+
+    .handle{
+      position:absolute;
+      left:50%;
+      bottom:-16px;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 120px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 35% 30%, rgba(255,255,255,0.85), rgba(255,255,255,0.0) 55%),
+        radial-gradient(circle at 70% 70%, rgba(255,255,255,0.35), rgba(0,0,0,0.0) 60%),
+        linear-gradient(135deg, rgba(255, 215, 0, 0.95), rgba(255, 109, 0, 0.85));
+      box-shadow: 0 16px 40px rgba(0,0,0,0.35), 0 0 0 10px rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.35);
+      cursor: grab;
+      display:grid;
+      place-items:center;
+      user-select:none;
+      touch-action:none;
+    }
+    .handle:active{cursor: grabbing}
+
+    .handle .txt{
+      font-weight:700;
+      letter-spacing: 0.02em;
+      color: rgba(30, 15, 0, 0.85);
+      text-shadow: 0 1px 0 rgba(255,255,255,0.35);
+      font-size: 14px;
+    }
+    .pulse{
+      position:absolute;
+      width: 160px;
+      height: 160px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.22);
+      animation: pulse 1.7s ease-in-out infinite;
+      pointer-events:none;
+      opacity: 0.55;
+    }
+    @keyframes pulse{
+      0%{transform: translateX(-50%) translateY(0) scale(0.85); opacity:0.55}
+      70%{transform: translateX(-50%) translateY(0) scale(1.08); opacity:0.20}
+      100%{transform: translateX(-50%) translateY(0) scale(1.12); opacity:0}
+    }
+
+    .pullMeter{
+      position:absolute;
+      right:14px;
+      bottom:14px;
+      width: 12px;
+      height: 200px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.14);
+      overflow:hidden;
+    }
+    .pullMeter .fill{
+      position:absolute;
+      left:0; right:0; bottom:0;
+      height: calc((var(--pull) / 260) * 100%);
+      background: linear-gradient(180deg, rgba(106,255,176,0.95), rgba(68,205,255,0.90));
+      transition: height .06s linear;
+    }
+
+    .fadeOut{animation: fadeOut .35s ease forwards}
+    .fadeIn{animation: fadeIn .45s ease forwards}
+    @keyframes fadeOut{to{opacity:0; transform: translateY(10px)}}
+    @keyframes fadeIn{from{opacity:0; transform: translateY(10px)} to{opacity:1; transform: translateY(0px)}}
+
+    /* Gallery */
+    .gallery{
+      display:none;
+      padding: 18px;
+    }
+    .galleryGrid{
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 14px;
+      min-height: 560px;
+      align-items:stretch;
+    }
+    @media (max-width: 880px){
+      .galleryGrid{grid-template-columns: 1fr; min-height: 680px;}
+    }
+    .frame{
+      border-radius: 22px;
+      background: rgba(0,0,0,0.22);
+      border: 1px solid rgba(255,255,255,0.14);
+      overflow:hidden;
+      display:grid;
+      place-items:center;
+      position:relative;
+      box-shadow: 0 12px 36px rgba(0,0,0,0.35);
+    }
+    .frame img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      display:block;
+      transform: scale(1.01);
+    }
+    .frame::after{
+      content:"";
+      position:absolute; inset:0;
+      background: radial-gradient(circle at 20% 15%, rgba(255,255,255,0.20), transparent 55%);
+      pointer-events:none;
+      mix-blend-mode: overlay;
+    }
+
+    .story{
+      border-radius: 22px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06));
+      border: 1px solid rgba(255,255,255,0.14);
+      padding: 16px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      gap: 14px;
+      box-shadow: 0 12px 36px rgba(0,0,0,0.30);
+    }
+    .kicker{
+      color: rgba(255,255,255,0.75);
+      font-size: 13px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+    .title2{
+      margin:0;
+      font-size: clamp(22px, 3.2vw, 34px);
+      line-height:1.12;
+    }
+    .msg{
+      margin:0;
+      color: var(--muted);
+      font-size: 15.5px;
+      line-height: 1.75;
+    }
+    .controls{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .btn{
+      cursor:pointer;
+      border:0;
+      padding: 12px 14px;
+      border-radius: 14px;
+      color: rgba(14, 9, 2, 0.92);
+      font-weight: 800;
+      letter-spacing: 0.01em;
+      background: linear-gradient(135deg, rgba(255,215,0,0.95), rgba(255,109,0,0.85));
+      box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+      transition: transform .12s ease;
+      user-select:none;
+    }
+    .btn:active{transform: scale(0.98)}
+    .btn.secondary{
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.16);
+      color: var(--text);
+      box-shadow: none;
+    }
+    .counter{
+      color: rgba(255,255,255,0.78);
+      font-size: 14px;
+      user-select:none;
+    }
+
+    /* Modal */
+    .overlay{
+      position:fixed; inset:0;
+      display:none;
+      place-items:center;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(8px);
+      z-index: 50;
+      padding: 18px;
+    }
+    .modal{
+      width:min(720px, 95vw);
+      border-radius: 26px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.14), rgba(255,255,255,0.08));
+      border: 1px solid rgba(255,255,255,0.18);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .modalInner{
+      padding: 18px;
+      display:grid;
+      grid-template-columns: 1fr 1.05fr;
+      gap: 14px;
+      align-items:center;
+    }
+    @media (max-width: 820px){
+      .modalInner{grid-template-columns: 1fr;}
+    }
+    .modal h3{
+      margin: 0 0 6px 0;
+      font-size: 26px;
+      line-height:1.15;
+    }
+    .modal p{
+      margin: 0;
+      color: var(--muted);
+      line-height:1.75;
+      font-size: 15.5px;
+    }
+    .closeX{
+      position:absolute; right: 12px; top: 12px;
+      width: 40px; height: 40px;
+      border-radius: 999px;
+      display:grid;
+      place-items:center;
+      cursor:pointer;
+      background: rgba(0,0,0,0.24);
+      border: 1px solid rgba(255,255,255,0.16);
+      user-select:none;
+    }
+
+    /* CSS Cake */
+    .cakeWrap{
+      display:grid;
+      place-items:center;
+      padding: 20px 10px;
+    }
+    .cake{
+      width: 220px;
+      height: 190px;
+      position:relative;
+      transform: translateY(4px);
+      filter: drop-shadow(0 20px 30px rgba(0,0,0,0.35));
+    }
+    .cake .plate{
+      position:absolute;
+      left:50%;
+      bottom: 0;
+      transform: translateX(-50%);
+      width: 240px;
+      height: 22px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.22);
+    }
+    .cake .layer{
+      position:absolute;
+      left:50%;
+      transform: translateX(-50%);
+      width: 210px;
+      height: 70px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(255,186,214,0.95), rgba(255,132,182,0.88));
+      border: 1px solid rgba(255,255,255,0.22);
+      overflow:hidden;
+    }
+    .cake .layer.top{bottom: 52px; width: 190px; height: 62px}
+    .cake .layer.base{bottom: 16px}
+    .icing{
+      position:absolute; inset:0;
+      background: linear-gradient(180deg, rgba(255,255,255,0.75), rgba(255,255,255,0.15));
+      opacity: 0.35;
+    }
+    .drip{
+      position:absolute;
+      top:-8px;
+      left:0; right:0;
+      height: 28px;
+      background: rgba(255,255,255,0.55);
+      filter: blur(0px);
+      border-bottom-left-radius: 18px;
+      border-bottom-right-radius: 18px;
+      clip-path: polygon(0 0, 100% 0, 100% 35%, 92% 70%, 84% 35%, 72% 80%, 62% 40%, 52% 78%, 44% 42%, 34% 82%, 22% 44%, 12% 74%, 0 35%);
+      opacity: 0.7;
+    }
+    .sprinkles{
+      position:absolute; inset:10px;
+      background:
+        radial-gradient(circle at 18% 30%, rgba(255,214,84,0.95) 0 3px, transparent 4px),
+        radial-gradient(circle at 38% 60%, rgba(68,205,255,0.95) 0 3px, transparent 4px),
+        radial-gradient(circle at 58% 35%, rgba(106,255,176,0.95) 0 3px, transparent 4px),
+        radial-gradient(circle at 78% 55%, rgba(255,106,213,0.95) 0 3px, transparent 4px),
+        radial-gradient(circle at 30% 42%, rgba(255,255,255,0.95) 0 2px, transparent 3px),
+        radial-gradient(circle at 66% 64%, rgba(255,255,255,0.95) 0 2px, transparent 3px);
+      opacity: 0.85;
+      pointer-events:none;
+    }
+    .candle{
+      position:absolute;
+      left:50%;
+      bottom: 118px;
+      transform: translateX(-50%);
+      width: 18px;
+      height: 56px;
+      border-radius: 8px;
+      background: linear-gradient(180deg, rgba(255,215,0,0.95), rgba(255,109,0,0.88));
+      border: 1px solid rgba(255,255,255,0.28);
+      cursor:pointer;
+    }
+    .flame{
+      position:absolute;
+      left:50%;
+      top:-16px;
+      transform: translateX(-50%);
+      width: 16px;
+      height: 22px;
+      border-radius: 999px 999px 999px 999px;
+      background: radial-gradient(circle at 40% 35%, rgba(255,255,255,0.85), rgba(255,214,84,0.95) 35%, rgba(255,109,0,0.90) 72%);
+      filter: blur(0px);
+      animation: flicker 1.1s ease-in-out infinite;
+    }
+    @keyframes flicker{
+      0%,100%{transform: translateX(-50%) translateY(0) scale(1)}
+      50%{transform: translateX(-50%) translateY(2px) scale(0.96)}
+    }
+
+    .secretHint{
+      margin-top: 10px;
+      font-size: 13.5px;
+      color: rgba(255,255,255,0.72);
+      user-select:none;
+    }
+    .secretHint strong{color: rgba(255,255,255,0.92)}
+
+    /* Confetti canvas */
+    #confetti{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index: 60;
+      display:none;
+    }
+
+    /* Floating name */
+    .nameFloat{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index: 61;
+      display:none;
+      overflow:hidden;
+    }
+    .nameFloat span{
+      position:absolute;
+      left: var(--x);
+      bottom: -40px;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      font-size: 24px;
+      color: rgba(255,255,255,0.82);
+      text-shadow: 0 12px 28px rgba(0,0,0,0.45);
+      opacity: 0.0;
+      animation: rise var(--t) linear forwards;
+    }
+    @keyframes rise{
+      0%{transform: translateY(0) scale(0.98); opacity:0}
+      10%{opacity:0.85}
+      100%{transform: translateY(-110vh) scale(1.06); opacity:0}
+    }
+
+    /* YouTube audio fallback */
+    .yt{
+      position:fixed;
+      width:1px; height:1px;
+      left:-10px; top:-10px;
+      opacity:0.01;
+      pointer-events:none;
+    }
+  </style>
+</head>
+<body>
+  <div class="grain"></div>
+
+  <canvas id="confetti"></canvas>
+  <div class="nameFloat" id="nameFloat"></div>
+
+  <!-- YouTube audio fallback: starts after user gesture -->
+  <iframe id="yt" class="yt" title="music" allow="autoplay; encrypted-media"></iframe>
+
+  <audio id="music" preload="none">
+    <source src="music/jag-ghoomeya.mp3" type="audio/mpeg" />
+  </audio>
+
+  <div class="wrap">
+    <div class="panel" id="panel">
+      <div class="topbar">
+        <div class="badge">🎀 Surprise link for <strong style="color:rgba(255,255,255,0.92);margin-left:6px;">Faiqa</strong></div>
+        <div class="musicBtn" id="musicBtn" aria-label="Toggle music">
+          <div class="dot off" id="musicDot"></div>
+          <div id="musicLabel">Music off</div>
+        </div>
+      </div>
+
+      <div class="stage" id="startStage">
+        <div class="hero">
+          <h1 class="h1">Happy Birthday, <span style="color:rgba(255,214,84,0.95)">Faiqa</span> 🎂✨</h1>
+          <p class="sub">
+            For the smartest, strongest, most golden hearted girl.
+            The one who loves food, fun, adventure, and doing daring things.
+          </p>
+          <div class="hint">
+            <span>Step 1: Pull the ribbon</span>
+            <span>Step 2: Enjoy the memories</span>
+            <span>Step 3: Open the cake</span>
+          </div>
+          <p class="sub" style="margin-top:12px">
+            Tip: Music starts when you pull the ribbon. If your browser blocks autoplay, tap the music button once.
+          </p>
+        </div>
+
+        <div class="ribbonZone">
+          <div class="ribbonCard" aria-label="Ribbon pull area">
+            <div class="sparkles"></div>
+
+            <div class="ribbon" id="ribbon"></div>
+
+            <div class="handle" id="handle" role="button" aria-label="Pull ribbon">
+              <div class="pulse" style="left:50%; top:50%; transform:translate(-50%,-50%);"></div>
+              <div class="txt">PULL 🎀</div>
+            </div>
+
+            <div class="pullMeter" aria-hidden="true">
+              <div class="fill" id="fill"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="gallery" id="gallery">
+        <div class="galleryGrid">
+          <div class="frame">
+            <img id="photo" alt="Faiqa photo" src="assets/faiq1.jpg" />
+          </div>
+
+          <div class="story">
+            <div>
+              <div class="kicker">A little slideshow</div>
+              <h2 class="title2" id="gTitle">You are rare, Faiqa</h2>
+              <p class="msg" id="gMsg">
+                Intelligent mind, fearless energy, and kindness that shows up without being asked.
+                Today is a reminder that you deserve the loudest happiness.
+              </p>
+            </div>
+
+            <div class="controls">
+              <div class="counter" id="counter">1 / 4</div>
+              <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                <button class="btn secondary" id="backBtn" type="button">Back</button>
+                <button class="btn" id="nextBtn" type="button">Next</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Cake modal -->
+  <div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-label="Birthday message">
+    <div class="modal">
+      <div class="closeX" id="closeX" aria-label="Close">✕</div>
+      <div class="modalInner">
+        <div class="cakeWrap">
+          <div class="cake" aria-label="Cake">
+            <div class="plate"></div>
+            <div class="layer base">
+              <div class="icing"></div>
+              <div class="drip"></div>
+              <div class="sprinkles"></div>
+            </div>
+            <div class="layer top">
+              <div class="icing"></div>
+              <div class="drip"></div>
+              <div class="sprinkles"></div>
+            </div>
+
+            <div class="candle" id="secretCandle" title="Tap me 👀">
+              <div class="flame"></div>
+            </div>
+          </div>
+          <div class="secretHint">Hidden message: tap the <strong>candle</strong> 👀</div>
+        </div>
+
+        <div style="padding: 10px 8px 10px 0;">
+          <h3>Make a wish, Faiqa ✨</h3>
+          <p>
+            May you always stay fearless and focused, with a heart that keeps shining.
+            May Allah bless you with health, happiness, success, and the kind of people who bring peace to your life.
+            Ameen.
+          </p>
+          <p style="margin-top:10px">
+            Also: may your next year be full of great food, big laughs, and the wildest adventures.
+          </p>
+
+          <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:14px;">
+            <button class="btn" id="boomBtn" type="button">Confetti time 🎉</button>
+            <button class="btn secondary" id="replayBtn" type="button">Replay photos</button>
+          </div>
+
+                  </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Secret pop -->
+  <div class="overlay" id="secretOverlay" role="dialog" aria-modal="true" aria-label="Secret message">
+    <div class="modal" style="width:min(560px,95vw);">
+      <div class="closeX" id="secretClose" aria-label="Close">✕</div>
+      <div style="padding: 18px;">
+        <div class="kicker">psst 👀</div>
+        <h3 style="margin-top:8px;">Secret message unlocked</h3>
+        <p>
+          Warning: Faiqa is dangerously intelligent.
+          She will do the daring thing, then laugh, then find the best food spot nearby like it was planned all along.
+          Also, if "one bite" is promised, it is never one bite.
+        </p>
+        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:14px;">
+          <button class="btn" id="secretOk" type="button">Okay okay 😄</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const images = [
+      "assets/faiq1.jpg",
+      "assets/faiq2.jpg",
+      "assets/faiq3.jpg",
+      "assets/faiq4.jpg",
+    ];
+
+    const titles = [
+      "You are rare, Faiqa",
+      "Strong mind, soft heart",
+      "Food + fun = your love language",
+      "Daredevil energy, always",
+    ];
+
+    const messages = [
+      "Intelligent mind, fearless energy, and kindness that shows up without being asked. Today is a reminder that you deserve the loudest happiness.",
+      "You carry strength so naturally, like it is part of your DNA. Keep choosing yourself, keep winning, keep glowing.",
+      "May every plan include good company and even better food. And yes, desserts count as a main.",
+      "May this year bring bigger adventures, safer landings, and stories that make you laugh for years.",
+    ];
+
+    const startStage = document.getElementById("startStage");
+    const gallery = document.getElementById("gallery");
+    const ribbon = document.getElementById("ribbon");
+    const handle = document.getElementById("handle");
+    const photo = document.getElementById("photo");
+    const counter = document.getElementById("counter");
+    const gTitle = document.getElementById("gTitle");
+    const gMsg = document.getElementById("gMsg");
+    const nextBtn = document.getElementById("nextBtn");
+    const backBtn = document.getElementById("backBtn");
+
+    const overlay = document.getElementById("overlay");
+    const closeX = document.getElementById("closeX");
+    const boomBtn = document.getElementById("boomBtn");
+    const replayBtn = document.getElementById("replayBtn");
+
+    const secretCandle = document.getElementById("secretCandle");
+    const secretOverlay = document.getElementById("secretOverlay");
+    const secretClose = document.getElementById("secretClose");
+    const secretOk = document.getElementById("secretOk");
+
+    const music = document.getElementById("music");
+    const yt = document.getElementById("yt");
+    const musicBtn = document.getElementById("musicBtn");
+    const musicLabel = document.getElementById("musicLabel");
+    const musicDot = document.getElementById("musicDot");
+
+    let idx = 0;
+    let musicStarted = false;
+    let unlocked = false;
+    let pulling = false;
+    let startY = 0;
+    let pull = 0;
+    const maxPull = 260;
+    const threshold = 210;
+
+    function setPull(px){
+      pull = Math.max(0, Math.min(maxPull, px));
+      document.documentElement.style.setProperty("--pull", pull + "px");
+    }
+
+    function softResetPull(){
+      const start = pull;
+      const t0 = performance.now();
+      const dur = 260;
+      function tick(t){
+        const p = Math.min(1, (t - t0) / dur);
+        const eased = 1 - Math.pow(1 - p, 3);
+        setPull(start * (1 - eased));
+        if(p < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+
+    async function startMusic(){
+      // First: try local MP3 if user provided it
+      try{
+        const p = music.play();
+        if(p) await p;
+        setMusicUI(true);
+        musicStarted = true;
+        return;
+      }catch(e){
+        // Fallback to YouTube embed (needs internet)
+        yt.src = "https://www.youtube.com/embed/t10sQb0Zmjs?autoplay=1&controls=0&loop=1&playlist=t10sQb0Zmjs";
+        setMusicUI(true);
+        musicStarted = true;
+        musicStarted = true;
+      }
+    }
+
+    function stopMusic(){
+      try{ music.pause(); music.currentTime = 0; }catch(e){}
+      yt.src = "";
+      setMusicUI(false);
+      musicStarted = false;
+    }
+
+    function setMusicUI(on){
+      musicLabel.textContent = on ? "Music on" : "Music off";
+      musicDot.classList.toggle("on", on);
+      musicDot.classList.toggle("off", !on);
+    }
+
+    musicBtn.addEventListener("click", async () => {
+      const isOn = musicDot.classList.contains("on") || yt.src;
+      if(isOn) stopMusic();
+      else await startMusic();
+    });
+
+    function showGallery(){
+      startStage.classList.add("fadeOut");
+      setTimeout(() => {
+        startStage.style.display = "none";
+        gallery.style.display = "block";
+        gallery.classList.remove("fadeOut");
+        gallery.classList.add("fadeIn");
+        render();
+      }, 320);
+    }
+
+    function render(){
+      photo.classList.remove("fadeIn");
+      photo.classList.add("fadeOut");
+      setTimeout(() => {
+        photo.src = images[idx];
+        gTitle.textContent = titles[idx];
+        gMsg.textContent = messages[idx];
+        counter.textContent = (idx + 1) + " / " + images.length;
+
+        photo.classList.remove("fadeOut");
+        photo.classList.add("fadeIn");
+      }, 240);
+
+      backBtn.disabled = idx === 0;
+      backBtn.style.opacity = idx === 0 ? "0.55" : "1";
+      nextBtn.textContent = (idx === images.length - 1) ? "Open cake 🎂" : "Next";
+    }
+
+    nextBtn.addEventListener("click", () => {
+      if(idx < images.length - 1){
+        idx += 1;
+        render();
+        return;
+      }
+      openCake();
+    });
+
+    backBtn.addEventListener("click", () => {
+      if(idx > 0){
+        idx -= 1;
+        render();
+      }else{
+        // back to start
+        gallery.classList.add("fadeOut");
+        setTimeout(() => {
+          gallery.style.display = "none";
+          startStage.style.display = "grid";
+          startStage.classList.remove("fadeOut");
+          startStage.classList.add("fadeIn");
+          idx = 0;
+          render();
+        }, 260);
+      }
+    });
+
+    function openCake(){
+      overlay.style.display = "grid";
+      startConfetti();
+      floatName("Faiqa");
+    }
+
+    function closeCake(){
+      overlay.style.display = "none";
+    }
+
+    closeX.addEventListener("click", closeCake);
+    overlay.addEventListener("click", (e) => {
+      if(e.target === overlay) closeCake();
+    });
+
+    replayBtn.addEventListener("click", () => {
+      closeCake();
+      idx = 0;
+      render();
+      gallery.scrollIntoView({behavior:"smooth", block:"start"});
+    });
+
+    // Secret message
+    function openSecret(){
+      secretOverlay.style.display = "grid";
+    }
+    function closeSecret(){
+      secretOverlay.style.display = "none";
+    }
+    secretCandle.addEventListener("click", openSecret);
+    secretClose.addEventListener("click", closeSecret);
+    secretOk.addEventListener("click", closeSecret);
+    secretOverlay.addEventListener("click", (e) => {
+      if(e.target === secretOverlay) closeSecret();
+    });
+
+    // Ribbon pull interactions
+    function unlock(){
+      if(unlocked) return;
+      unlocked = true;
+      startMusic();
+      showGallery();
+      setTimeout(() => setPull(0), 120);
+    }
+
+    handle.addEventListener("pointerdown", (e) => {
+      pulling = true;
+      startY = e.clientY;
+      handle.setPointerCapture(e.pointerId);
+    });
+
+    handle.addEventListener("pointermove", (e) => {
+      if(!pulling) return;
+      const dy = e.clientY - startY;
+      setPull(dy);
+      if(pull > threshold) unlock();
+    });
+
+    handle.addEventListener("pointerup", async () => {
+      pulling = false;
+      softResetPull();
+      if(unlocked && !musicStarted){
+        try{ await startMusic(); }catch(e){}
+      }
+    });
+
+    handle.addEventListener("pointercancel", () => {
+      pulling = false;
+      softResetPull();
+    });
+
+    // Also allow click on ribbon handle for accessibility
+    handle.addEventListener("click", () => {
+      if(!unlocked){
+        setPull(threshold + 10);
+        unlock();
+      }
+    });
+
+    // Confetti
+    const canvas = document.getElementById("confetti");
+    const ctx = canvas.getContext("2d");
+    let confettiOn = false;
+    let particles = [];
+    function resize(){
+      canvas.width = window.innerWidth * devicePixelRatio;
+      canvas.height = window.innerHeight * devicePixelRatio;
+      ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);
+    }
+    window.addEventListener("resize", resize);
+    resize();
+
+    function spawn(n){
+      for(let i=0;i<n;i++){
+        particles.push({
+          x: Math.random() * window.innerWidth,
+          y: -20 - Math.random()*window.innerHeight*0.2,
+          r: 4 + Math.random()*6,
+          w: 6 + Math.random()*10,
+          h: 6 + Math.random()*14,
+          vx: -2 + Math.random()*4,
+          vy: 2 + Math.random()*5.5,
+          rot: Math.random()*Math.PI,
+          vr: -0.15 + Math.random()*0.3,
+          life: 0,
+          ttl: 220 + Math.random()*160
+        });
+      }
+    }
+
+    function startConfetti(){
+      canvas.style.display = "block";
+      confettiOn = true;
+      particles = [];
+      spawn(140);
+      const t0 = performance.now();
+
+      function loop(t){
+        if(!confettiOn) return;
+        ctx.clearRect(0,0,window.innerWidth,window.innerHeight);
+
+        if(particles.length < 220) spawn(6);
+
+        for(const p of particles){
+          p.life += 1;
+          p.x += p.vx;
+          p.y += p.vy;
+          p.rot += p.vr;
+          p.vy += 0.015;
+
+          const alpha = Math.max(0, 1 - p.life/p.ttl);
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate(p.rot);
+          ctx.globalAlpha = alpha;
+
+          // no hard-coded palette needed, but a light randomized look
+          const hue = (p.x * 0.35 + p.life * 2.2) % 360;
+          ctx.fillStyle = `hsla(${hue}, 90%, 70%, ${alpha})`;
+          ctx.fillRect(-p.w/2, -p.h/2, p.w, p.h);
+          ctx.restore();
+        }
+        particles = particles.filter(p => p.life < p.ttl && p.y < window.innerHeight + 80);
+
+        // Auto stop after ~12 seconds unless user hits button again
+        if(t - t0 > 12000){
+          confettiOn = false;
+          canvas.style.display = "none";
+          return;
+        }
+        requestAnimationFrame(loop);
+      }
+      requestAnimationFrame(loop);
+    }
+
+    boomBtn.addEventListener("click", () => {
+      startConfetti();
+      floatName("Faiqa");
+    });
+
+    // Floating name
+    const nameFloat = document.getElementById("nameFloat");
+    function floatName(name){
+      nameFloat.style.display = "block";
+      nameFloat.innerHTML = "";
+      const count = 26;
+      for(let i=0;i<count;i++){
+        const s = document.createElement("span");
+        const x = Math.round(Math.random() * 95) + "vw";
+        const t = (8 + Math.random()*6).toFixed(2) + "s";
+        s.style.setProperty("--x", x);
+        s.style.setProperty("--t", t);
+        s.textContent = name;
+        nameFloat.appendChild(s);
+      }
+      setTimeout(() => { nameFloat.style.display = "none"; }, 11000);
+    }
+
+    // Initial UI state
+    setPull(0);
+    setMusicUI(false);
+  </script>
+</body>
+</html>
